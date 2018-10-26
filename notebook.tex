@@ -1,0 +1,1135 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{Credit card fraud detection}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{} INITIALIZATION \PYZsh{}\PYZsh{}\PYZsh{}}
+        \PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd}
+        \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+        \PY{k+kn}{import} \PY{n+nn}{h2o}
+        \PY{k+kn}{from} \PY{n+nn}{h2o}\PY{n+nn}{.}\PY{n+nn}{estimators}\PY{n+nn}{.}\PY{n+nn}{deeplearning} \PY{k}{import} \PY{n}{H2OAutoEncoderEstimator}
+        \PY{k+kn}{from} \PY{n+nn}{h2o}\PY{n+nn}{.}\PY{n+nn}{estimators}\PY{n+nn}{.}\PY{n+nn}{deeplearning} \PY{k}{import} \PY{n}{H2ODeepLearningEstimator}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{n}{creditcard} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{creditcard.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{n}{creditcard}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Dataset contains numerical input variables V1 to V28, which are the result of a PCA transformation of the original features}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+   Time        V1        V2        V3        V4        V5        V6        V7  \textbackslash{}
+0   0.0 -1.359807 -0.072781  2.536347  1.378155 -0.338321  0.462388  0.239599   
+1   0.0  1.191857  0.266151  0.166480  0.448154  0.060018 -0.082361 -0.078803   
+2   1.0 -1.358354 -1.340163  1.773209  0.379780 -0.503198  1.800499  0.791461   
+3   1.0 -0.966272 -0.185226  1.792993 -0.863291 -0.010309  1.247203  0.237609   
+4   2.0 -1.158233  0.877737  1.548718  0.403034 -0.407193  0.095921  0.592941   
+
+         V8        V9  {\ldots}         V21       V22       V23       V24  \textbackslash{}
+0  0.098698  0.363787  {\ldots}   -0.018307  0.277838 -0.110474  0.066928   
+1  0.085102 -0.255425  {\ldots}   -0.225775 -0.638672  0.101288 -0.339846   
+2  0.247676 -1.514654  {\ldots}    0.247998  0.771679  0.909412 -0.689281   
+3  0.377436 -1.387024  {\ldots}   -0.108300  0.005274 -0.190321 -1.175575   
+4 -0.270533  0.817739  {\ldots}   -0.009431  0.798278 -0.137458  0.141267   
+
+        V25       V26       V27       V28  Amount  Class  
+0  0.128539 -0.189115  0.133558 -0.021053  149.62      0  
+1  0.167170  0.125895 -0.008983  0.014724    2.69      0  
+2 -0.327642 -0.139097 -0.055353 -0.059752  378.66      0  
+3  0.647376 -0.221929  0.062723  0.061458  123.50      0  
+4 -0.206010  0.502292  0.219422  0.215153   69.99      0  
+
+[5 rows x 31 columns]
+Dataset contains numerical input variables V1 to V28, which are the result of a PCA transformation of the original features
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{} PLOTTING FUNCTIONS \PYZsh{}\PYZsh{}\PYZsh{}}
+        \PY{k+kn}{from} \PY{n+nn}{ggplot} \PY{k}{import} \PY{o}{*}
+        
+        \PY{k}{def} \PY{n+nf}{plot1}\PY{p}{(}\PY{n}{df}\PY{p}{)}\PY{p}{:}
+            \PY{n}{plot1} \PY{o}{=} \PY{n}{ggplot}\PY{p}{(}\PY{n}{aes}\PY{p}{(}\PY{n}{x} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Class}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{,} \PY{n}{data}\PY{o}{=}\PY{n}{df}\PY{p}{)} \PY{o}{+} \PY{n}{geom\PYZus{}bar}\PY{p}{(}\PY{p}{)} \PY{o}{+} \PY{n}{ggtitle}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Plot1 \PYZhy{} Highly imbalanced Class problem}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)} \PY{o}{+} \PY{n}{labs}\PY{p}{(}\PY{n}{y} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Count}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{x} \PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Class}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+            \PY{k}{return} \PY{n+nb}{print}\PY{p}{(}\PY{n}{plot1}\PY{p}{)}
+        
+        \PY{k}{def} \PY{n+nf}{plot2}\PY{p}{(}\PY{n}{df}\PY{p}{)}\PY{p}{:}
+            \PY{n}{plot2} \PY{o}{=} \PY{n}{ggplot}\PY{p}{(}\PY{n}{aes}\PY{p}{(}\PY{n}{x} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{day}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{,} \PY{n}{data} \PY{o}{=} \PY{n}{df}\PY{p}{)} \PY{o}{+} \PY{n}{geom\PYZus{}bar}\PY{p}{(}\PY{p}{)} \PY{o}{+} \PY{n}{labs}\PY{p}{(}\PY{n}{y} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Count}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{x} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Day}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)} \PY{o}{+} \PY{n}{ggtitle}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Plot2 \PYZhy{} Transactions per day}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+            \PY{k}{return} \PY{n+nb}{print}\PY{p}{(}\PY{n}{plot2}\PY{p}{)}
+        
+        \PY{k}{def} \PY{n+nf}{plot3}\PY{p}{(}\PY{n}{df}\PY{p}{)}\PY{p}{:}
+            \PY{n}{plot3} \PY{o}{=} \PY{n}{ggplot}\PY{p}{(}\PY{n}{aes}\PY{p}{(}\PY{n}{x} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Time\PYZus{}bin}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{,} \PY{n}{data} \PY{o}{=} \PY{n}{df}\PY{p}{)} \PY{o}{+} \PY{n}{geom\PYZus{}bar}\PY{p}{(}\PY{p}{)} \PY{o}{+} \PY{n}{facet\PYZus{}wrap}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Class}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{scales}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{free}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{ncol}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{)} \PY{o}{+} \PY{n}{labs}\PY{p}{(}\PY{n}{y} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Count}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{x} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Time\PYZus{}bin}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)} \PY{o}{+} \PY{n}{ggtitle}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Plot3 \PYZhy{} Fraud cases distribution by Time\PYZus{}bin}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)} 
+            \PY{k}{return} \PY{n+nb}{print}\PY{p}{(}\PY{n}{plot3}\PY{p}{)}
+        
+        \PY{k}{def} \PY{n+nf}{plot4}\PY{p}{(}\PY{n}{df}\PY{p}{)}\PY{p}{:}
+            \PY{n}{plot4} \PY{o}{=} \PY{n}{ggplot}\PY{p}{(}\PY{n}{aes}\PY{p}{(}\PY{n}{x} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Amount}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{,} \PY{n}{data} \PY{o}{=} \PY{n}{df}\PY{p}{)} \PY{o}{+} \PY{n}{geom\PYZus{}histogram}\PY{p}{(}\PY{p}{)} \PY{o}{+} \PY{n}{facet\PYZus{}wrap}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Class}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{scales} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{free}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{ncol} \PY{o}{=} \PY{l+m+mi}{2}\PY{p}{)} \PY{o}{+} \PY{n}{labs}\PY{p}{(}\PY{n}{y} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Count}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{x} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Amount}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)} \PY{o}{+} \PY{n}{ggtitle}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Plot4 \PYZhy{} Fraud cases distribution by Amount}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+            \PY{k}{return}\PY{p}{(}\PY{n+nb}{print}\PY{p}{(}\PY{n}{plot4}\PY{p}{)}\PY{p}{)}
+        
+        \PY{k}{def} \PY{n+nf}{plot5}\PY{p}{(}\PY{n}{df}\PY{p}{)}\PY{p}{:}
+            \PY{n}{plot5} \PY{o}{=} \PY{n}{ggplot}\PY{p}{(}\PY{n}{aes}\PY{p}{(}\PY{n}{x} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{DF.L2.C1}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{y} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{DF.L2.C2}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{color} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Class}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{,} \PY{n}{data} \PY{o}{=} \PY{n}{df}\PY{p}{)} \PY{o}{+} \PY{n}{geom\PYZus{}point}\PY{p}{(}\PY{n}{alpha} \PY{o}{=} \PY{l+m+mf}{0.1}\PY{p}{)} \PY{o}{+} \PY{n}{ggtitle}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Plot5 \PYZhy{} Dimensionality reduced layer 2 features class dependency}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+            \PY{k}{return} \PY{n+nb}{print}\PY{p}{(}\PY{n}{plot5}\PY{p}{)}
+        
+        \PY{k}{def} \PY{n+nf}{plot6}\PY{p}{(}\PY{n}{df}\PY{p}{)}\PY{p}{:}
+            \PY{n}{plot6} \PY{o}{=} \PY{n}{ggplot}\PY{p}{(}\PY{n}{aes}\PY{p}{(}\PY{n}{y} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Reconstruction.MSE}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{color} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Class}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{,} \PY{n}{data} \PY{o}{=} \PY{n}{df}\PY{p}{)} \PY{o}{+} \PY{n}{gem\PYZus{}point}\PY{p}{(}\PY{n}{alpha} \PY{o}{=} \PY{l+m+mf}{0.3}\PY{p}{)} \PY{o}{+} \PY{n}{geom\PYZus{}hline}\PY{p}{(}\PY{n}{data} \PY{o}{=} \PY{n}{mean\PYZus{}mse}\PY{p}{,} \PY{n}{aes}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+            \PY{k}{return} \PY{n+nb}{print}\PY{p}{(}\PY{n}{plot6}\PY{p}{)}
+        
+        \PY{k}{def} \PY{n+nf}{plot7}\PY{p}{(}\PY{n}{df}\PY{p}{)}\PY{p}{:}
+            \PY{n}{plot7} \PY{o}{=} \PY{n}{ggplot}\PY{p}{(}\PY{n}{aes}\PY{o}{=}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{n}{data} \PY{o}{=} \PY{n}{df}\PY{p}{)} \PY{o}{+} 
+            \PY{k}{return} \PY{n+nb}{print}\PY{p}{(}\PY{n}{plot7}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+C:\textbackslash{}Anaconda\textbackslash{}lib\textbackslash{}site-packages\textbackslash{}ggplot\textbackslash{}utils.py:81: FutureWarning: pandas.tslib is deprecated and will be removed in a future version.
+You can access Timestamp as pandas.Timestamp
+  pd.tslib.Timestamp,
+C:\textbackslash{}Anaconda\textbackslash{}lib\textbackslash{}site-packages\textbackslash{}ggplot\textbackslash{}stats\textbackslash{}smoothers.py:4: FutureWarning: The pandas.lib module is deprecated and will be removed in a future version. These are private functions and can be accessed from pandas.\_libs.lib instead
+  from pandas.lib import Timestamp
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{} DATA EXPLORATION AND FEATURE ENGG. \PYZsh{}\PYZsh{}\PYZsh{}}
+        \PY{n}{plot1}\PY{p}{(}\PY{n}{creditcard}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Plot1 shows the severe imbalance in fraud cases in the dataset \PYZhy{} This imbalance is to be taken care of in all the analysis}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{ process below}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}5}]:} \PY{c+c1}{\PYZsh{} Time only tells us the order in which transactions have been done, it doesn’t actually tell us anything about the actual times (i.e. time of day) of the transaction. Therefore, normalize them by day and bin them into four groups according to time of day.}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Time variable summary}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{creditcard}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Time}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{describe}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+        \PY{n}{creditcard}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{day}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{where}\PY{p}{(}\PY{n}{creditcard}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Time}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{\PYZlt{}} \PY{l+m+mi}{86400}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{day1}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{day2}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{creditcard}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Time\PYZus{}day}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{where}\PY{p}{(}\PY{n}{creditcard}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{day}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{==} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{day2}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{creditcard}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Time}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{\PYZhy{}} \PY{p}{(}\PY{l+m+mi}{3600}\PY{o}{*}\PY{l+m+mi}{24}\PY{p}{)}\PY{p}{,} \PY{n}{creditcard}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Time}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Day1 time}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{creditcard}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Time\PYZus{}day}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{n}{creditcard}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{day}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{==} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{day1}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{describe}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Day2 time}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{creditcard}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Time\PYZus{}day}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{n}{creditcard}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{day}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{==} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{day2}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{describe}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Time variable summary
+ count    284807.000000
+mean      94813.859575
+std       47488.145955
+min           0.000000
+25\%       54201.500000
+50\%       84692.000000
+75\%      139320.500000
+max      172792.000000
+Name: Time, dtype: float64
+Day1 time
+ count    144786.000000
+mean      52947.673435
+std       21349.674538
+min           0.000000
+25\%       38432.000000
+50\%       54689.000000
+75\%       70976.000000
+max       86398.000000
+Name: Time\_day, dtype: float64
+Day2 time
+ count    140021.000000
+mean      51704.777555
+std       20715.506616
+min           0.000000
+25\%       37842.000000
+50\%       53425.000000
+75\%       68182.000000
+max       86392.000000
+Name: Time\_day, dtype: float64
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}6}]:} \PY{n}{plot2}\PY{p}{(}\PY{n}{creditcard}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Plot showing nearly the same number of transaction per day}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_5_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+<ggplot: (-9223371873440859420)>
+Plot showing nearly the same number of transaction per day
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}7}]:} \PY{c+c1}{\PYZsh{} Bin transactions according to time of day}
+        \PY{n}{bins} \PY{o}{=} \PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{38432}\PY{p}{,} \PY{l+m+mi}{52947}\PY{p}{,} \PY{l+m+mi}{70976}\PY{p}{,} \PY{l+m+mi}{86398}\PY{p}{]}
+        \PY{n}{bin\PYZus{}label} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{gr1}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{gr2}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{gr3}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{gr4}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+        \PY{n}{creditcard}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Time\PYZus{}bin}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{cut}\PY{p}{(}\PY{n}{creditcard}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Time\PYZus{}day}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{bins}\PY{o}{=}\PY{n}{bins}\PY{p}{,} \PY{n}{labels}\PY{o}{=}\PY{n}{bin\PYZus{}label}\PY{p}{)}
+        \PY{n}{plot3}\PY{p}{(}\PY{n}{creditcard}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{The distribution of transactions over the four Time\PYZus{}bin shows that majority of fraud cases have happened in group1}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_6_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+<ggplot: (163413916336)>
+The distribution of transactions over the four Time\_bin shows that majority of fraud cases have happened in group1
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}8}]:} \PY{c+c1}{\PYZsh{} ANALYZING TRANSACTIONS BY THE AMOUNT TRANSFERRED}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Class0 transaction amount stats}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{creditcard}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Amount}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{n}{creditcard}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Class}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{==} \PY{l+m+mi}{0}\PY{p}{]}\PY{o}{.}\PY{n}{describe}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Class1(Fraud) transaction amount stats}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{creditcard}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Amount}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{n}{creditcard}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Class}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{==} \PY{l+m+mi}{1}\PY{p}{]}\PY{o}{.}\PY{n}{describe}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+        \PY{n}{plot4}\PY{p}{(}\PY{n}{creditcard}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Fraudulent transactions had a higher mean amount of money that was transferred, but the maximum amount was much lower compared to regular transactions}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Class0 transaction amount stats
+ count    284315.000000
+mean         88.291022
+std         250.105092
+min           0.000000
+25\%           5.650000
+50\%          22.000000
+75\%          77.050000
+max       25691.160000
+Name: Amount, dtype: float64
+Class1(Fraud) transaction amount stats
+ count     492.000000
+mean      122.211321
+std       256.683288
+min         0.000000
+25\%         1.000000
+50\%         9.250000
+75\%       105.890000
+max      2125.870000
+Name: Amount, dtype: float64
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_7_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+<ggplot: (-9223371873437160462)>
+Fraudulent transactions had a higher mean amount of money that was transferred, but the maximum amount was much lower compared to regular transactions
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}11}]:} \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{} MODELING \PYZsh{}\PYZsh{}\PYZsh{}}
+         
+         \PY{c+c1}{\PYZsh{}\PYZsh{} FEATURE LEARNING USING AUTOENCODERS \PYZsh{}\PYZsh{}}
+         \PY{n}{prox} \PY{o}{=} \PY{p}{\PYZob{}}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{202.141.80.24}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{3128}\PY{l+s+s2}{\PYZdq{}}\PY{p}{\PYZcb{}}
+         \PY{n}{h2o}\PY{o}{.}\PY{n}{init}\PY{p}{(}\PY{n}{nthreads} \PY{o}{=} \PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{proxy} \PY{o}{=} \PY{n}{prox}\PY{p}{,} \PY{n}{username} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{vishal.bharti}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{password} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{pSpEKZ8m}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Checking whether there is an H2O instance running at http://localhost:54321. connected.
+Warning: Your H2O cluster version is too old (6 months and 13 days)! Please download and install the latest version from http://h2o.ai/download/
+
+    \end{Verbatim}
+
+    
+    \begin{verbatim}
+--------------------------  ----------------------------------
+H2O cluster uptime:         23 mins 42 secs
+H2O cluster timezone:       Asia/Kolkata
+H2O data parsing timezone:  UTC
+H2O cluster version:        3.18.0.2
+H2O cluster version age:    6 months and 13 days !!!
+H2O cluster name:           H2O_from_python_The_Extreme_chpm3d
+H2O cluster total nodes:    1
+H2O cluster free memory:    1.753 Gb
+H2O cluster total cores:    4
+H2O cluster allowed cores:  4
+H2O cluster status:         locked, healthy
+H2O connection url:         http://localhost:54321
+H2O connection proxy:
+H2O internal security:      False
+H2O API Extensions:         Algos, AutoML, Core V3, Core V4
+Python version:             3.6.5 final
+--------------------------  ----------------------------------
+    \end{verbatim}
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}12}]:} \PY{c+c1}{\PYZsh{} CONVERT DATA TO H2O FRAME AND SPLIT INTO train\PYZus{}supervised, train\PYZus{}unsupervised, test}
+         \PY{n}{credit\PYZus{}hf} \PY{o}{=} \PY{n}{h2o}\PY{o}{.}\PY{n}{H2OFrame}\PY{p}{(}\PY{n}{creditcard}\PY{p}{)}
+         \PY{n}{train\PYZus{}unsupervised}\PY{p}{,} \PY{n}{train\PYZus{}supervised}\PY{p}{,} \PY{n}{test} \PY{o}{=} \PY{n}{credit\PYZus{}hf}\PY{o}{.}\PY{n}{split\PYZus{}frame}\PY{p}{(}\PY{n}{ratios} \PY{o}{=} \PY{p}{[}\PY{l+m+mf}{0.4}\PY{p}{,}\PY{l+m+mf}{0.4}\PY{p}{]}\PY{p}{,} \PY{n}{seed} \PY{o}{=} \PY{l+m+mi}{100}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Parse progress: |█████████████████████████████████████████████████████████| 100\%
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}13}]:} \PY{c+c1}{\PYZsh{} \PYZsh{} FIT AUTOENCODER TO train\PYZus{}unsupervised}
+         \PY{c+c1}{\PYZsh{} model\PYZus{}autoencoder = H2OAutoEncoderEstimator(activation = \PYZsq{}tanh\PYZsq{}, hidden = [10, 2, 10], epochs = 100, ignore\PYZus{}const\PYZus{}cols=False, seed = 100, model\PYZus{}id = \PYZdq{}model\PYZus{}autoencoder\PYZdq{})}
+         \PY{c+c1}{\PYZsh{} model\PYZus{}autoencoder.fit(train\PYZus{}unsupervised.drop([\PYZsq{}Class\PYZsq{}], axis = 1))}
+         \PY{c+c1}{\PYZsh{} model\PYZus{}autoencoder\PYZus{}path = h2o.save\PYZus{}model(model=model\PYZus{}autoencoder, path=\PYZdq{}/Data Science and Analytics/Projects/Anomaly Detection in Credit card transactions/Model\PYZus{}files/model\PYZus{}autoencoder\PYZdq{}, force=True)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}14}]:} \PY{n}{model\PYZus{}autoencoder} \PY{o}{=} \PY{n}{h2o}\PY{o}{.}\PY{n}{load\PYZus{}model}\PY{p}{(}\PY{n}{path} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{/Data Science and Analytics/Projects/Anomaly Detection in Credit card transactions/Model\PYZus{}files/model\PYZus{}autoencoder/model\PYZus{}autoencoder}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{model\PYZus{}autoencoder}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Model Details
+=============
+H2OAutoEncoderEstimator :  Deep Learning
+Model Key:  model\_autoencoder
+
+
+ModelMetricsAutoEncoder: deeplearning
+** Reported on train data. **
+
+MSE: 0.0030260081792912105
+RMSE: 0.055009164502755455
+Scoring History: 
+
+    \end{Verbatim}
+
+    
+    \begin{verbatim}
+    timestamp            duration          training_speed    epochs    iterations    samples      training_rmse    training_mse
+--  -------------------  ----------------  ----------------  --------  ------------  -----------  ---------------  --------------
+    2018-09-02 23:30:59  0.208 sec         0.00000 obs/sec   0         0             0            0.258121         0.0666265
+    2018-09-02 23:31:04  5.761 sec         90284 obs/sec     4.38095   5             499542       0.190683         0.0363601
+    2018-09-02 23:31:10  11.355 sec        90016 obs/sec     8.76588   10            999538       0.0659172        0.00434508
+    2018-09-02 23:31:15  16.948 sec        89948 obs/sec     13.1523   15            1.49971e+06  0.0761549        0.00579957
+    2018-09-02 23:31:21  22.428 sec        90355 obs/sec     17.5376   20            1.99974e+06  0.167505         0.028058
+    2018-09-02 23:31:27  28.276 sec        89416 obs/sec     21.9248   25            2.49999e+06  0.0651693        0.00424704
+    2018-09-02 23:31:32  33.809 sec        89635 obs/sec     26.3114   30            3.00019e+06  0.163343         0.0266808
+    2018-09-02 23:31:38  39.361 sec        89791 obs/sec     30.6938   35            3.4999e+06   0.0550092        0.00302601
+    2018-09-02 23:31:43  44.929 sec        89839 obs/sec     35.0805   40            4.00009e+06  0.141691         0.0200763
+    2018-09-02 23:31:49  50.421 sec        90014 obs/sec     39.4672   45            4.50028e+06  0.148844         0.0221545
+    2018-09-02 23:31:54  55.951 sec        90088 obs/sec     43.8503   50            5.00007e+06  0.145968         0.0213066
+    2018-09-02 23:32:00  1 min  1.650 sec  89924 obs/sec     48.2382   55            5.50041e+06  0.166074         0.0275804
+    2018-09-02 23:32:06  1 min  7.516 sec  89547 obs/sec     52.6256   60            6.00068e+06  0.154392         0.023837
+    2018-09-02 23:32:06  1 min  7.548 sec  89545 obs/sec     52.6256   60            6.00068e+06  0.0550092        0.00302601
+    \end{verbatim}
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+Variable Importances: 
+
+    \end{Verbatim}
+
+    
+    \begin{verbatim}
+variable              relative_importance    scaled_importance     percentage
+--------------------  ---------------------  --------------------  ---------------------
+Time_bin.gr4          1.0                    1.0                   0.17079979075720217
+Time_bin.gr2          0.8910607099533081     0.8910607099533081    0.15219298281198904
+Time_bin.gr3          0.708403468132019      0.708403468132019     0.1209951641286252
+day.day2              0.6186259984970093     0.6186259984970093    0.10566119110025445
+day.day1              0.6029840707778931     0.6029840707778931    0.10298955311879011
+---                   ---                    ---                   ---
+V1                    0.008269194513559341   0.008269194513559341  0.0014123766926465396
+V18                   0.007362314499914646   0.007362314499914646  0.0012574817760741372
+V22                   0.007293651346117258   0.007293651346117258  0.0012457541237728136
+Time_bin.missing(NA)  0.0                    0.0                   0.0
+day.missing(NA)       0.0                    0.0                   0.0
+    \end{verbatim}
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+
+See the whole table with table.as\_data\_frame()
+
+    \end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}14}]:} 
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}15}]:} \PY{c+c1}{\PYZsh{} CONVERT TEST TO AUTOENCODED REPRESENTATION}
+         \PY{n}{test\PYZus{}autoenc} \PY{o}{=} \PY{n}{model\PYZus{}autoencoder}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{test}\PY{p}{)}
+         \PY{n}{test\PYZus{}autoenc}\PY{o}{.}\PY{n}{describe}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+deeplearning prediction progress: |███████████████████████████████████████| 100\%
+Rows:56729
+Cols:39
+
+
+
+    \end{Verbatim}
+
+    
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}16}]:} \PY{c+c1}{\PYZsh{}\PYZsh{} DIMENSIONALITY REDUCTION WITH AUTOENCODERS \PYZhy{} USING THE SECOND LAYER OF model\PYZus{}autoencoder TO SPOT FRAUD CASES \PYZsh{}\PYZsh{}}
+         \PY{n}{train\PYZus{}features\PYZus{}L2} \PY{o}{=} \PY{n}{model\PYZus{}autoencoder}\PY{o}{.}\PY{n}{deepfeatures}\PY{p}{(}\PY{n}{train\PYZus{}unsupervised}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}
+         \PY{n}{train\PYZus{}features\PYZus{}L2}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Class}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{train\PYZus{}unsupervised}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Class}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+         \PY{n}{plot5}\PY{p}{(}\PY{n}{train\PYZus{}features\PYZus{}L2}\PY{o}{.}\PY{n}{as\PYZus{}data\PYZus{}frame}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Here we do not see segregable fraud and non\PYZhy{}fraud clusters, so dimensionality reduction with autoencoder model alone}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{ is not sufficient to identify fraud cases.}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+deepfeatures progress: |██████████████████████████████████████████████████| 100\%
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_13_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+<ggplot: (-9223371873423604087)>
+Here we do not see segregable fraud and non-fraud clusters, so dimensionality reduction with autoencoder model alone
+ is not sufficient to identify fraud cases.
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}17}]:} \PY{c+c1}{\PYZsh{}\PYZsh{} DIMENSIONALITY REDUCTION WITH AUTOENCODERS \PYZhy{} USING THE LAST HIDDEN LAYER OF model\PYZus{}autoencoder AS FEATURES FOR MODEL TRAINING \PYZsh{}\PYZsh{}}
+         \PY{n}{train\PYZus{}features\PYZus{}L3} \PY{o}{=} \PY{n}{model\PYZus{}autoencoder}\PY{o}{.}\PY{n}{deepfeatures}\PY{p}{(}\PY{n}{train\PYZus{}unsupervised}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} \PYZsh{} TRAINING CLASSIFICATION MODEL ON FEATURES LEARNED BY model\PYZus{}autoencoder}
+         \PY{c+c1}{\PYZsh{} model\PYZus{}autoencoder\PYZus{}dim = H2ODeepLearningEstimator(activation = \PYZsq{}tanh\PYZsq{}, hidden = [10, 2, 10], epochs = 100, ignore\PYZus{}const\PYZus{}cols=False, balance\PYZus{}classes = True, seed = 100, model\PYZus{}id = \PYZdq{}model\PYZus{}autoencoder\PYZus{}dim\PYZdq{})}
+         \PY{c+c1}{\PYZsh{} model\PYZus{}autoencoder\PYZus{}dim.fit(x = train\PYZus{}features\PYZus{}L3, y = train\PYZus{}unsupervised[\PYZsq{}Class\PYZsq{}].asfactor())}
+         \PY{c+c1}{\PYZsh{} model\PYZus{}autoencoder\PYZus{}dim\PYZus{}path = h2o.save\PYZus{}model(model=model\PYZus{}autoencoder\PYZus{}dim, path=\PYZdq{}/Data Science and Analytics/Projects/Anomaly Detection in Credit card transactions/Model\PYZus{}files/model\PYZus{}autoencoder\PYZus{}dim\PYZdq{}, force=True)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+deepfeatures progress: |██████████████████████████████████████████████████| 100\%
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}18}]:} \PY{n}{model\PYZus{}autoencoder\PYZus{}dim} \PY{o}{=} \PY{n}{h2o}\PY{o}{.}\PY{n}{load\PYZus{}model}\PY{p}{(}\PY{n}{path} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{/Data Science and Analytics/Projects/Anomaly Detection in Credit card transactions/Model\PYZus{}files/model\PYZus{}autoencoder\PYZus{}dim/model\PYZus{}autoencoder\PYZus{}dim}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{model\PYZus{}autoencoder\PYZus{}dim}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Model Details
+=============
+H2ODeepLearningEstimator :  Deep Learning
+Model Key:  model\_autoencoder\_dim
+
+
+ModelMetricsBinomial: deeplearning
+** Reported on train data. **
+
+MSE: 0.4002208672345835
+RMSE: 0.6326301188171359
+LogLoss: 1.815699847529939
+Mean Per-Class Error: 0.47321965591518766
+AUC: 0.47988625742844393
+Gini: -0.04022748514311214
+Confusion Matrix (Act/Pred) for max f1 @ threshold = 0.00038116227214083205: 
+
+    \end{Verbatim}
+
+    
+    \begin{verbatim}
+       0    1     Error    Rate
+-----  ---  ----  -------  ---------------
+0      361  4550  0.9265   (4550.0/4911.0)
+1      180  4883  0.0356   (180.0/5063.0)
+Total  541  9433  0.4742   (4730.0/9974.0)
+    \end{verbatim}
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+Maximum Metrics: Maximum metrics at their respective thresholds
+
+
+    \end{Verbatim}
+
+    
+    \begin{verbatim}
+metric                       threshold    value     idx
+---------------------------  -----------  --------  -----
+max f1                       0.000381162  0.673703  395
+max f2                       0.000286396  0.837524  399
+max f0point5                 0.00102978   0.573251  387
+max accuracy                 0.00102978   0.533086  387
+max precision                0.583516     1         0
+max recall                   0.000286396  1         399
+max specificity              0.583516     1         0
+max absolute_mcc             0.187053     0.12473   365
+max min_per_class_accuracy   0.187119     0.451906  362
+max mean_per_class_accuracy  0.00102978   0.52678   387
+    \end{verbatim}
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+Gains/Lift Table: Avg response rate: 50.76 \%
+
+
+    \end{Verbatim}
+
+    
+    \begin{verbatim}
+    group    cumulative_data_fraction    lower_threshold    lift      cumulative_lift    response_rate    cumulative_response_rate    capture_rate    cumulative_capture_rate    gain      cumulative_gain
+--  -------  --------------------------  -----------------  --------  -----------------  ---------------  --------------------------  --------------  -------------------------  --------  -----------------
+    1        0.0112292                   0.579537           1.49507   1.49507            0.758929         0.758929                    0.0167885       0.0167885                  49.5073   49.5073
+    2        0.0231602                   0.568692           0.976712  1.22804            0.495798         0.623377                    0.0116532       0.0284416                  -2.32881  22.8038
+    3        0.0300782                   0.565699           1.45607   1.28049            0.73913          0.65                        0.0100731       0.0385147                  45.6071   28.0486
+    4        0.040004                    0.55111            0.636761  1.12076            0.323232         0.568922                    0.00632036      0.0448351                  -36.3239  12.0765
+    5        0.0500301                   0.537492           0         0.896162           0                0.45491                     0               0.0448351                  -100      -10.3838
+    6        0.100662                    0.454592           0.596845  0.745609           0.30297          0.378486                    0.0302192       0.0750543                  -40.3155  -25.4391
+    7        0.14999                     0.454589           1.3894    0.957336           0.705285         0.485963                    0.0685364       0.143591                   38.9395   -4.26643
+    8        0.200521                    0.454587           1.28205   1.03916            0.650794         0.5275                      0.0647837       0.208374                   28.2049   3.91635
+    9        0.29998                     0.243003           0.840021  0.973138           0.426411         0.493984                    0.0835473       0.291922                   -15.9979  -2.68623
+    10       0.402446                    0.191778           0.9368    0.963886           0.475538         0.489287                    0.0959905       0.387912                   -6.32002  -3.61143
+    11       0.501504                    0.187091           0.703849  0.912523           0.357287         0.463215                    0.0697215       0.457634                   -29.6151  -8.74771
+    12       0.602667                    0.00414632         1.34716   0.985481           0.683845         0.50025                     0.136283        0.593917                   34.7161   -1.45193
+    13       0.700421                    0.00414632         1.30524   1.03011            0.662564         0.522903                    0.127592        0.721509                   30.5237   3.01074
+    14       0.79998                     0.00414537         1.16453   1.04684            0.591138         0.531395                    0.115939        0.837448                   16.4529   4.68364
+    15       0.900842                    0.00414537         0.816581  1.02106            0.414513         0.518308                    0.0823622       0.91981                    -18.3419  2.10561
+    16       1                           0.00028338         0.808707  1                  0.410516         0.50762                     0.0801896       1                          -19.1293  0
+    \end{verbatim}
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+
+Scoring History: 
+
+    \end{Verbatim}
+
+    
+    \begin{verbatim}
+    timestamp            duration          training_speed    epochs    iterations    samples      training_rmse    training_logloss    training_auc    training_lift    training_classification_error
+--  -------------------  ----------------  ----------------  --------  ------------  -----------  ---------------  ------------------  --------------  ---------------  -------------------------------
+    2018-09-03 00:31:29  0.000 sec                           0         0             0            nan              nan                 nan             nan              nan
+    2018-09-03 00:31:29  0.659 sec         242951 obs/sec    0.438562  1             99853        0.711408         3.35668             0.566175        1.8085           0.48095
+    2018-09-03 00:31:34  5.811 sec         271464 obs/sec    6.58741   15            1.49984e+06  0.711032         3.29276             0.516458        1.04409          0.444456
+    2018-09-03 00:31:40  11.242 sec        279418 obs/sec    13.1767   30            3.00011e+06  0.710429         3.25218             0.594112        0.689492         0.482354
+    2018-09-03 00:31:45  16.155 sec        282076 obs/sec    19.3355   44            4.40237e+06  0.63263          1.8157              0.479886        1.49507          0.474233
+    2018-09-03 00:31:50  21.373 sec        283962 obs/sec    25.929    59            5.90358e+06  0.710203         3.08728             0.534587        1.96998          0.48085
+    2018-09-03 00:31:55  26.487 sec        286185 obs/sec    32.5109   74            7.40218e+06  0.70734          2.87525             0.533602        0                0.469721
+    2018-09-03 00:32:00  31.797 sec        289133 obs/sec    39.5471   90            9.00419e+06  0.710689         3.29414             0.595802        1.70479          0.49238
+    2018-09-03 00:32:05  36.804 sec        290891 obs/sec    46.1398   105           1.05052e+07  0.707494         2.83576             0.512936        0                0.49238
+    2018-09-03 00:32:11  42.107 sec        292551 obs/sec    53.1644   121           1.21046e+07  0.709585         3.0027              0.527427        1.40087          0.457088
+    2018-09-03 00:32:16  47.361 sec        294100 obs/sec    60.1886   137           1.37039e+07  0.695764         2.48498             0.534249        1.63227          0.49238
+    2018-09-03 00:32:21  52.559 sec        295686 obs/sec    67.2155   153           1.53038e+07  0.710362         3.42661             0.588744        1.14259          0.40014
+    2018-09-03 00:32:26  57.676 sec        297407 obs/sec    74.2424   169           1.69037e+07  0.698039         3.14201             0.635922        1.96998          0.425306
+    2018-09-03 00:32:31  1 min  2.691 sec  299346 obs/sec    81.2727   185           1.85044e+07  0.711311         3.72451             0.553122        1.10931          0.49238
+    2018-09-03 00:32:31  1 min  2.736 sec  299336 obs/sec    81.2727   185           1.85044e+07  0.63263          1.8157              0.479886        1.49507          0.474233
+    \end{verbatim}
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+Variable Importances: 
+
+    \end{Verbatim}
+
+    
+    \begin{verbatim}
+variable    relative_importance    scaled_importance    percentage
+----------  ---------------------  -------------------  ------------
+DF.L3.C1    1                      1                    0.157873
+DF.L3.C10   0.957742               0.957742             0.151202
+DF.L3.C9    0.758724               0.758724             0.119782
+DF.L3.C7    0.657305               0.657305             0.103771
+DF.L3.C3    0.609521               0.609521             0.0962271
+DF.L3.C2    0.558021               0.558021             0.0880966
+DF.L3.C6    0.518654               0.518654             0.0818816
+DF.L3.C5    0.452402               0.452402             0.0714222
+DF.L3.C4    0.430441               0.430441             0.0679551
+DF.L3.C8    0.391385               0.391385             0.0617892
+    \end{verbatim}
+
+    
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}18}]:} 
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}29}]:} \PY{n}{test\PYZus{}features\PYZus{}L3} \PY{o}{=} \PY{n}{model\PYZus{}autoencoder}\PY{o}{.}\PY{n}{deepfeatures}\PY{p}{(}\PY{n}{test}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{)}
+         \PY{n}{test\PYZus{}autoenc\PYZus{}dim} \PY{o}{=} \PY{n}{model\PYZus{}autoencoder\PYZus{}dim}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{test\PYZus{}features\PYZus{}L3}\PY{p}{)}
+         
+         \PY{n}{test\PYZus{}autoenc\PYZus{}dim\PYZus{}df} \PY{o}{=} \PY{n}{test\PYZus{}autoenc\PYZus{}dim}\PY{o}{.}\PY{n}{as\PYZus{}data\PYZus{}frame}\PY{p}{(}\PY{p}{)}
+         \PY{n}{test\PYZus{}df} \PY{o}{=} \PY{n}{test}\PY{o}{.}\PY{n}{as\PYZus{}data\PYZus{}frame}\PY{p}{(}\PY{p}{)}
+         \PY{n}{test\PYZus{}df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Class\PYZus{}predict\PYZus{}autoencoder\PYZus{}dim}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{=} \PY{n}{test\PYZus{}autoenc\PYZus{}dim\PYZus{}df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{predict}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{test\PYZus{}df}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Class}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Class\PYZus{}predict\PYZus{}autoencoder\PYZus{}dim}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{)}\PY{o}{.}\PY{n}{Class}\PY{o}{.}\PY{n}{count}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{80/(80+3) = 96.4}\PY{l+s+si}{\PYZpc{} o}\PY{l+s+s2}{f the fraud cases were identified correctly but it also mis\PYZhy{}classified lots of other non fraud transactions}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+deepfeatures progress: |██████████████████████████████████████████████████| 100\%
+deeplearning prediction progress: |███████████████████████████████████████| 100\%
+Class  Class\_predict\_autoencoder\_dim
+0      0                                 4635
+       1                                52011
+1      0                                    3
+       1                                   80
+Name: Class, dtype: int64
+80/(80+3) = 96.4\% of the fraud cases were identified correctly but it also mis-classified lots of other non fraud transactions
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}30}]:} \PY{c+c1}{\PYZsh{}\PYZsh{} ANOMALY DETECTION BY SETTING THRESHOLD ON RECONSTRUCTED MSE \PYZsh{}\PYZsh{}}
+         \PY{n}{anomaly} \PY{o}{=} \PY{n}{model\PYZus{}autoencoder}\PY{o}{.}\PY{n}{anomaly}\PY{p}{(}\PY{n}{test}\PY{p}{)}
+         \PY{n}{anomaly\PYZus{}df} \PY{o}{=} \PY{n}{anomaly}\PY{o}{.}\PY{n}{as\PYZus{}data\PYZus{}frame}\PY{p}{(}\PY{p}{)}
+         \PY{n}{anomaly\PYZus{}df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Class}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{=} \PY{p}{(}\PY{n}{test}\PY{o}{.}\PY{n}{as\PYZus{}data\PYZus{}frame}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Class}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+         \PY{n}{anomaly\PYZus{}df}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}40}]:} \PY{n}{mean\PYZus{}mse} \PY{o}{=} \PY{n}{anomaly\PYZus{}df}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Class}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}40}]:}    Reconstruction.MSE  Class
+         0            0.001513      0
+         1            0.001775      0
+         2            0.001466      0
+         3            0.001737      0
+         4            0.002086      0
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}22}]:} \PY{c+c1}{\PYZsh{} \PYZsh{}\PYZsh{}\PYZsh{} PLOTING FUNCTIONS IN R \PYZhy{} GGPLOT2}
+         \PY{c+c1}{\PYZsh{} import rpy2.robjects as robj}
+         \PY{c+c1}{\PYZsh{} from rpy2.robjects.packages import importr}
+         \PY{c+c1}{\PYZsh{} from rpy2.robjects import pandas2ri}
+         
+         \PY{c+c1}{\PYZsh{} utils = importr(\PYZsq{}utils\PYZsq{})}
+         \PY{c+c1}{\PYZsh{} utils.install\PYZus{}packages(\PYZsq{}tidyverse\PYZsq{})}
+         
+         \PY{c+c1}{\PYZsh{} gr = importr(\PYZsq{}grDevices\PYZsq{})}
+         \PY{c+c1}{\PYZsh{} robj.pandas2ri.activate()}
+         
+         \PY{c+c1}{\PYZsh{} r\PYZus{}plot1 = robj.r(\PYZdq{}\PYZdq{}\PYZdq{}}
+         \PY{c+c1}{\PYZsh{}     function(creditcard)\PYZob{}}
+         \PY{c+c1}{\PYZsh{}     library(tidyverse)}
+             
+         \PY{c+c1}{\PYZsh{}     p = creditcard \PYZpc{}\PYZgt{}\PYZpc{} ggplot(aes(x = Class)) + geom\PYZus{}bar(color = \PYZdq{}grey\PYZdq{}, fill = \PYZdq{}lightgrey\PYZdq{}) + theme\PYZus{}bw()}
+         \PY{c+c1}{\PYZsh{}     print(p)}
+         \PY{c+c1}{\PYZsh{}     \PYZcb{}}
+         \PY{c+c1}{\PYZsh{}     \PYZdq{}\PYZdq{}\PYZdq{})}
+         
+         \PY{c+c1}{\PYZsh{} \PYZsh{} r\PYZus{}plot2 = robj.r(\PYZdq{}\PYZdq{}\PYZdq{}}
+         \PY{c+c1}{\PYZsh{} \PYZsh{}     function(creditcard)\PYZob{}}
+         \PY{c+c1}{\PYZsh{} \PYZsh{}     library(ggplot2)}
+         \PY{c+c1}{\PYZsh{} \PYZsh{}     library(tidyverse)}
+         \PY{c+c1}{\PYZsh{} \PYZsh{}     libraray(dplyr)}
+             
+         \PY{c+c1}{\PYZsh{} \PYZsh{}     p = creditcard \PYZpc{}\PYZgt{}\PYZpc{} ggplot(aes(x = Class)) + geom\PYZus{}bar(color = \PYZdq{}grey\PYZdq{}, fill = \PYZdq{}lightgrey\PYZdq{}) + theme\PYZus{}bw()}
+         \PY{c+c1}{\PYZsh{} \PYZsh{}     print(p)}
+         \PY{c+c1}{\PYZsh{} \PYZsh{}     \PYZcb{}}
+         \PY{c+c1}{\PYZsh{} \PYZsh{}     \PYZdq{}\PYZdq{}\PYZdq{})}
+         \PY{c+c1}{\PYZsh{} creditcard\PYZus{}R = robj.conversion.py2ri(creditcard)}
+         
+         \PY{c+c1}{\PYZsh{} r\PYZus{}plot1(creditcard\PYZus{}R)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}23}]:} \PY{c+c1}{\PYZsh{} import rpy2.ipython}
+         
+         \PY{c+c1}{\PYZsh{} \PYZpc{}reload\PYZus{}ext rpy2.ipython}
+         
+         \PY{c+c1}{\PYZsh{} \PYZsh{} We need ggplot2}
+         
+         \PY{c+c1}{\PYZsh{} \PYZpc{}R require(ggplot2)}
+         \PY{c+c1}{\PYZsh{} \PYZpc{}R library(\PYZdq{}ggplot2\PYZdq{})}
+         \PY{c+c1}{\PYZsh{} \PYZsh{} Load in the pandas library}
+         \PY{c+c1}{\PYZsh{} import pandas as pd }
+         \PY{c+c1}{\PYZsh{} \PYZsh{} Make a pandas DataFrame}
+         \PY{c+c1}{\PYZsh{} df = pd.DataFrame(\PYZob{}\PYZsq{}Alphabet\PYZsq{}: [\PYZsq{}a\PYZsq{}, \PYZsq{}b\PYZsq{}, \PYZsq{}c\PYZsq{}, \PYZsq{}d\PYZsq{},\PYZsq{}e\PYZsq{}, \PYZsq{}f\PYZsq{}, \PYZsq{}g\PYZsq{}, \PYZsq{}h\PYZsq{},\PYZsq{}i\PYZsq{}],}
+         \PY{c+c1}{\PYZsh{}                    \PYZsq{}A\PYZsq{}: [4, 3, 5, 2, 1, 7, 7, 5, 9],}
+         \PY{c+c1}{\PYZsh{}                    \PYZsq{}B\PYZsq{}: [0, 4, 3, 6, 7, 10,11, 9, 13],}
+         \PY{c+c1}{\PYZsh{}                    \PYZsq{}C\PYZsq{}: [1, 2, 3, 1, 2, 3, 1, 2, 3]\PYZcb{})}
+         \PY{c+c1}{\PYZsh{} \PYZsh{} Take the name of input variable df and assign it to an R variable of the same name}
+         \PY{c+c1}{\PYZsh{} \PYZpc{}R \PYZhy{}i df}
+         \PY{c+c1}{\PYZsh{} \PYZsh{} Plot the DataFrame df}
+         \PY{c+c1}{\PYZsh{} \PYZpc{}R print(ggplot(data=df) + geom\PYZus{}point(aes(x=A, y=B, color=C)))}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}24}]:} \PY{c+c1}{\PYZsh{} \PYZsh{}\PYZsh{}USING THE PRE TRAINED AUTOENCODER TO DETECT ANOMALY}
+         \PY{c+c1}{\PYZsh{} model\PYZus{}pre = H2ODeepLearningEstimator(pretrained\PYZus{}autoencoder = model\PYZus{}autoencoder, balance\PYZus{}classes = True, ignore\PYZus{}const\PYZus{}cols = False, hidden = [10, 2 , 10], epochs = 100, activation = \PYZdq{}tanh\PYZdq{})}
+         \PY{c+c1}{\PYZsh{} model\PYZus{}pre.fit(x = train\PYZus{}supervised.drop([\PYZsq{}Class\PYZsq{}], axis = 1), y = train\PYZus{}supervised[\PYZsq{}Class\PYZsq{}].asfactor())}
+         \PY{c+c1}{\PYZsh{} model\PYZus{}pre\PYZus{}path = h2o.save\PYZus{}model(model=model\PYZus{}pre, path=\PYZdq{}/Data Science and Analytics/Projects/Anomaly Detection in Credit card transactions/Model\PYZus{}files/model\PYZus{}pretrained\PYZus{}autoencoder\PYZdq{})}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}25}]:} \PY{c+c1}{\PYZsh{} \PYZsh{}\PYZsh{}USING THE PRE TRAINED AUTOENCODER TO DETECT ANOMALY \PYZhy{} CROSS VALIDATED}
+         \PY{c+c1}{\PYZsh{} model\PYZus{}pre = H2ODeepLearningEstimator(pretrained\PYZus{}autoencoder = model\PYZus{}autoencoder, balance\PYZus{}classes = True, ignore\PYZus{}const\PYZus{}cols = False, hidden = [10, 2 , 10], epochs = 100, activation = \PYZdq{}tanh\PYZdq{})}
+         \PY{c+c1}{\PYZsh{} model\PYZus{}pre.fit(x = train\PYZus{}supervised.drop([\PYZsq{}Class\PYZsq{}], axis = 1), y = train\PYZus{}supervised[\PYZsq{}Class\PYZsq{}].asfactor())}
+         \PY{c+c1}{\PYZsh{} model\PYZus{}pre\PYZus{}path = h2o.save\PYZus{}model(model=model\PYZus{}pre, path=\PYZdq{}/Data Science and Analytics/Projects/Anomaly Detection in Credit card transactions/Model\PYZus{}files/model\PYZus{}pretrained\PYZus{}autoencoder\PYZdq{})}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}26}]:} \PY{n}{model\PYZus{}pre} \PY{o}{=} \PY{n}{h2o}\PY{o}{.}\PY{n}{load\PYZus{}model}\PY{p}{(}\PY{n}{path} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{/Data Science and Analytics/Projects/Anomaly Detection in Credit card transactions/Model\PYZus{}files/model\PYZus{}pretrained\PYZus{}autoencoder/DeepLearning\PYZus{}model\PYZus{}python\PYZus{}1535806794663\PYZus{}47}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{model\PYZus{}pre}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Model Details
+=============
+H2ODeepLearningEstimator :  Deep Learning
+Model Key:  DeepLearning\_model\_python\_1535806794663\_47
+
+
+ModelMetricsBinomial: deeplearning
+** Reported on train data. **
+
+MSE: 0.000897111222127962
+RMSE: 0.02995181500557123
+LogLoss: 0.006492061844087719
+Mean Per-Class Error: 0.0005842259006816342
+AUC: 0.9996150208445662
+Gini: 0.9992300416891324
+Confusion Matrix (Act/Pred) for max f1 @ threshold = 0.9760141457817489: 
+
+    \end{Verbatim}
+
+    
+    \begin{verbatim}
+       0     1     Error    Rate
+-----  ----  ----  -------  -------------
+0      5129  6     0.0012   (6.0/5135.0)
+1      0     4885  0        (0.0/4885.0)
+Total  5129  4891  0.0006   (6.0/10020.0)
+    \end{verbatim}
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+Maximum Metrics: Maximum metrics at their respective thresholds
+
+
+    \end{Verbatim}
+
+    
+    \begin{verbatim}
+metric                       threshold    value     idx
+---------------------------  -----------  --------  -----
+max f1                       0.976014     0.999386  97
+max f2                       0.976014     0.999754  97
+max f0point5                 0.976014     0.999018  97
+max accuracy                 0.976014     0.999401  97
+max precision                0.999869     1         0
+max recall                   0.976014     1         97
+max specificity              0.999869     1         0
+max absolute_mcc             0.976014     0.998802  97
+max min_per_class_accuracy   0.976014     0.998832  97
+max mean_per_class_accuracy  0.976014     0.999416  97
+    \end{verbatim}
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+Gains/Lift Table: Avg response rate: 48.75 \%
+
+
+    \end{Verbatim}
+
+    
+    \begin{verbatim}
+    group    cumulative_data_fraction    lower_threshold    lift     cumulative_lift    response_rate    cumulative_response_rate    capture_rate    cumulative_capture_rate    gain     cumulative_gain
+--  -------  --------------------------  -----------------  -------  -----------------  ---------------  --------------------------  --------------  -------------------------  -------  -----------------
+    1        0.0113772                   0.999865           2.05118  2.05118            1                1                           0.0233367       0.0233367                  105.118  105.118
+    2        0.0204591                   0.999865           2.05118  2.05118            1                1                           0.0186285       0.0419652                  105.118  105.118
+    3        0.0300399                   0.999865           2.05118  2.05118            1                1                           0.019652        0.0616172                  105.118  105.118
+    4        0.041018                    0.999865           2.05118  2.05118            1                1                           0.0225179       0.0841351                  105.118  105.118
+    5        0.0511976                   0.999865           2.05118  2.05118            1                1                           0.0208802       0.105015                   105.118  105.118
+    6        0.103194                    0.999865           2.05118  2.05118            1                1                           0.106653        0.211668                   105.118  105.118
+    7        0.18493                     0.999865           2.04867  2.05007            0.998779         0.99946                     0.167451        0.37912                    104.867  105.007
+    8        0.200898                    0.999865           2.05118  2.05016            1                0.999503                    0.0327533       0.411873                   105.118  105.016
+    9        0.303393                    0.999833           2.04918  2.04983            0.999026         0.999342                    0.210031        0.621904                   104.918  104.983
+    10       0.402196                    0.988816           2.04703  2.04914            0.99798          0.999007                    0.202252        0.824156                   104.703  104.914
+    11       0.5                         1.50442e-10        1.79792  2                  0.876531         0.97505                     0.175844        1                          79.7919  100
+    12       0.6                         2.14671e-11        0        1.66667            0                0.812542                    0               1                          -100     66.6667
+    13       0.7                         2.09131e-11        0        1.42857            0                0.696464                    0               1                          -100     42.8571
+    14       0.8                         2.08228e-11        0        1.25               0                0.609406                    0               1                          -100     25
+    15       0.9                         2.08056e-11        0        1.11111            0                0.541694                    0               1                          -100     11.1111
+    16       1                           5.45619e-12        0        1                  0                0.487525                    0               1                          -100     0
+    \end{verbatim}
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+
+Scoring History: 
+
+    \end{Verbatim}
+
+    
+    \begin{verbatim}
+     timestamp            duration          training_speed    epochs              iterations    samples     training_rmse         training_logloss      training_auc        training_lift      training_classification_error
+---  -------------------  ----------------  ----------------  ------------------  ------------  ----------  --------------------  --------------------  ------------------  -----------------  -------------------------------
+     2018-09-01 19:51:54  0.000 sec                           0.0                 0             0.0         nan                   nan                   nan                 nan                nan
+     2018-09-01 19:51:55  1.043 sec         174148 obs/sec    0.4388604493928192  1             99961.0     0.32012437087953016   0.7656014768921501    0.9811531435280189  2.051177072671443  0.0626746506986028
+     2018-09-01 19:52:00  6.300 sec         190300 obs/sec    4.829919130366065   11            1100130.0   0.26400346305159617   0.4796117503949815    0.9958632979163407  2.051177072671443  0.01586826347305389
+     2018-09-01 19:52:06  11.539 sec        191462 obs/sec    9.21865533379578    21            2099770.0   0.23380725766935148   0.36838006450218      0.9990101048556926  2.051177072671443  0.0054890219560878245
+     2018-09-01 19:52:11  16.679 sec        193497 obs/sec    13.609248641196976  31            3099833.0   0.20038403410390646   0.2096448975709893    0.9991929868972742  2.051177072671443  0.004391217564870259
+---  ---                  ---               ---               ---                 ---           ---         ---                   ---                   ---                 ---                ---
+     2018-09-01 19:53:13  1 min 19.029 sec  206099 obs/sec    70.2627209426888    160           16004021.0  0.029396155307922323  0.007108427574174859  0.9996137451551209  2.051177072671443  0.0005988023952095808
+     2018-09-01 19:53:18  1 min 24.014 sec  205902 obs/sec    74.6575157831886    170           17005041.0  0.02995181500557123   0.006492061844087719  0.9996150208445662  2.051177072671443  0.0005988023952095808
+     2018-09-01 19:53:23  1 min 29.382 sec  206016 obs/sec    79.4902095937201    181           18105803.0  0.032433606393359675  0.007504226932049822  0.9996016261053899  2.051177072671443  0.0007984031936127744
+     2018-09-01 19:53:29  1 min 34.755 sec  207119 obs/sec    84.75685108923757   193           19305407.0  0.03641260492402755   0.00987490951520774   0.9995173508714056  2.051177072671443  0.000998003992015968
+     2018-09-01 19:53:29  1 min 34.825 sec  207112 obs/sec    84.75685108923757   193           19305407.0  0.02995181500557123   0.006492061844087719  0.9996150208445662  2.051177072671443  0.0005988023952095808
+    \end{verbatim}
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+
+See the whole table with table.as\_data\_frame()
+Variable Importances: 
+
+    \end{Verbatim}
+
+    
+    \begin{verbatim}
+variable              relative_importance    scaled_importance    percentage
+--------------------  ---------------------  -------------------  --------------------
+Amount                1.0                    1.0                  0.071199245412298
+V2                    0.6755270957946777     0.6755270957946777   0.0480970194761422
+V5                    0.5436718463897705     0.5436718463897705   0.038709025214862455
+V11                   0.5329760313034058     0.5329760313034058   0.03794749125164381
+V24                   0.5059682726860046     0.5059682726860046   0.03602455921780736
+---                   ---                    ---                  ---
+V18                   0.2562667429447174     0.2562667429447174   0.018245998721931223
+V13                   0.2502378821372986     0.2502378821372986   0.017816748381747224
+Time                  0.20064395666122437    0.20064395666122437  0.014285698310816998
+V28                   0.18563389778137207    0.18563389778137207  0.013216993444977352
+Time_bin.missing(NA)  0.0                    0.0                  0.0
+    \end{verbatim}
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+
+See the whole table with table.as\_data\_frame()
+
+    \end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}26}]:} 
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}41}]:} \PY{n}{pred} \PY{o}{=} \PY{n}{model\PYZus{}pre}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{test}\PY{p}{)}
+         \PY{n}{pred\PYZus{}df} \PY{o}{=} \PY{n}{pred}\PY{o}{.}\PY{n}{as\PYZus{}data\PYZus{}frame}\PY{p}{(}\PY{p}{)}
+         
+         \PY{n}{test\PYZus{}df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Class\PYZus{}predict\PYZus{}autoencoder\PYZus{}pre}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{=} \PY{n}{pred\PYZus{}df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{predict}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{test\PYZus{}df}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Class}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Class\PYZus{}predict\PYZus{}autoencoder\PYZus{}pre}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{)}\PY{o}{.}\PY{n}{Class}\PY{o}{.}\PY{n}{count}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+deeplearning prediction progress: |███████████████████████████████████████| 100\%
+Class  Class\_predict\_autoencoder\_pre
+0      0                                56590
+       1                                   56
+1      0                                   17
+       1                                   66
+Name: Class, dtype: int64
+
+    \end{Verbatim}
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
